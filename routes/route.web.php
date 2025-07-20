@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\CompteController;
 use App\Controller\SecurityController;
 
 $routes = [
@@ -11,4 +12,9 @@ $routes = [
         'controller' => SecurityController::class,
         'methode' => 'store'
     ],
+    '/show' => [
+        'controller' => CompteController::class,
+        'methode' => 'show'
+    ]
+
 ];

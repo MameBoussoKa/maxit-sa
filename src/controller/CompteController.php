@@ -10,7 +10,6 @@ use App\Service\UserService;
 class CompteController extends AbstractController
 {
   
-
     public function __construct()
     {
        $this->layout = 'base';
@@ -21,11 +20,13 @@ class CompteController extends AbstractController
     }
     public function store() {
     }
-    public function show() {}
+    public function show() {
+         $this->renderHtml('compte/compte');
+    }
 
     public function index(){}
     public function edit() {
-         $this->renderHtml('compte/compte');
+      
     }
     public function destroy() {}
 }

@@ -20,6 +20,9 @@
         "vlucas/phpdotenv": "^5.6"
     },
      "scripts": {
-      "index":"php script/mon_script.php" 
+       "database:migrate":"php migrations/migration.php",
+       "database:seed":"php seeders/seeder.php"
+
+
     }
 }

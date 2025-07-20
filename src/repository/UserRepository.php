@@ -29,8 +29,9 @@ class UserRepository
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        var_dump($result);die;
-
+        if ($result) {
+            return User::toObject($result);
+        }
         return null;
     }
 }
