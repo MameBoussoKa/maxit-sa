@@ -1,38 +1,23 @@
-
-
 <?php
-
-namespace App\Core;
-
+namespace App;
 
 use Symfony\Component\Yaml\Yaml;
 
-use function App\Config\dd;
+class App {
+    private array $services = [];
 
-class App{
-      private static array $instancies=[];
-    
-      public static function getDependencies(string $nomClass){
-            // $dependencies= require __DIR__ . "/../config/dependencies.php";
-            $dependencies=Yml::parseFile( __DIR__ . '/../config/service.yml');
-          
-            if(array_key_exists($nomClass, self::$instancies)){
-                    return self::$instancies[$nomClass];        
-            }
+    public function __construct() {
+        $this->loadServices();
+    }
 
-            foreach($dependencies as $packages){
-                if(isset($packages[$nomClass])){
-                    $class= $packages[$nomClass];
-                    if(class_exists($class)){
-                            $instance=$class::getInstance();
-                            if($instance){
-                            self::$instancies[$nomClass]=$instance;
-                            return $instance;
-                            }
-                    }
-                }
-            }
-            return null;
-      }
+    private function loadServices() {
+        $config = Yaml::parseFile(__DIR__ . '/../config/services.yml');
+        foreach ($config['services'] as $key => $class) {
+            $this->services[$key] = new $class();
+        }
+    }
 
+    public function get(string $name) {
+        return $this->services[$name] ?? null;
+    }
 }
